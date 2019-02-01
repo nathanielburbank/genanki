@@ -1,9 +1,9 @@
 APKG_COL = r'''
 INSERT INTO col VALUES(
     null,
-    :creation_time,
-    :modification_time,
-    :modification_time,
+    1411124400,
+    1425279151694,
+    1425279151690,
     11,
     0,
     0,
@@ -15,7 +15,7 @@ INSERT INTO col VALUES(
         "addToCur": true,
         "collapseTime": 1200,
         "curDeck": 1,
-        "curModel": "' || :modification_time || '",
+        "curModel": "1425279151691",
         "dueCounts": true,
         "estTimes": true,
         "newBury": true,
@@ -25,7 +25,7 @@ INSERT INTO col VALUES(
         "sortType": "noteFld",
         "timeLim": 0
     }',
-    :models,
+    ?3,
     '{
         "1": {
             "collapsed": false,
@@ -55,73 +55,78 @@ INSERT INTO col VALUES(
             ],
             "usn": 0
         },
-        "' || :deck_id || '": {
+        "' || ?2 || '": {
             "collapsed": false,
-            "conf": ' || :options_id || ',
-            "desc": "' || :description || '",
+            "conf": 1,
+            "desc": "",
             "dyn": 0,
-            "extendNew": 10,
+            "extendNew": 0,
             "extendRev": 50,
-            "id": ' || :deck_id || ',
+            "id": ' || ?2 || ',
             "lrnToday": [
-                5,
-                0
+                163,
+                2
             ],
             "mod": 1425278051,
-            "name": "' || :name || '",
+            "name": "' || ?1 || '",
             "newToday": [
-                5,
-                0
+                163,
+                2
             ],
             "revToday": [
-                5,
+                163,
                 0
             ],
             "timeToday": [
-                5,
-                0
+                163,
+                23598
             ],
             "usn": -1
         }
     }',
     '{
-        "' || :options_id || '": {
-            "id": ' || :options_id || ',
-            "autoplay": ' || :autoplay_audio || ',
+        "1": {
+            "autoplay": true,
+            "id": 1,
             "lapse": {
-                "delays": ' || :lapse_steps || ',
-                "leechAction": ' || :leech_action || ',
-                "leechFails": ' || :leech_threshold || ',
-                "minInt": ' || :lapse_min_interval || ',
-                "mult": ' || :leech_interval_multiplier || '
+                "delays": [
+                    10
+                ],
+                "leechAction": 0,
+                "leechFails": 8,
+                "minInt": 1,
+                "mult": 0
             },
-            "maxTaken": ' || :max_time_per_answer || ',
+            "maxTaken": 60,
             "mod": 0,
-            "name": "' || :options_group_name || '",
+            "name": "Default",
             "new": {
-                "bury": ' || :bury_related_new_cards || ',
-                "delays": ' || :new_steps || ',
-                "initialFactor": ' || :starting_ease || ',
+                "bury": true,
+                "delays": [
+                    1,
+                    10
+                ],
+                "initialFactor": 2500,
                 "ints": [
-                    ' || :graduating_interval || ',
-                    ' || :easy_interval || ',
+                    1,
+                    4,
                     7
                 ],
-                "order": ' || :order || ',
-                "perDay": ' || :new_cards_per_day || ',
+                "order": 1,
+                "perDay": 20,
                 "separate": true
             },
-            "replayq": ' || :replay_audio_for_answer || ',
+            "replayq": true,
             "rev": {
-                "bury": ' || :bury_related_review_cards || ',
-                "ease4": ' || :easy_bonus || ',
+                "bury": true,
+                "ease4": 1.3,
                 "fuzz": 0.05,
-                "ivlFct": ' || :interval_modifier || ',
-                "maxIvl": ' || :max_interval || ',
+                "ivlFct": 1,
+                "maxIvl": 36500,
                 "minSpace": 1,
-                "perDay": ' || :max_reviews_per_day || '
+                "perDay": 100
             },
-            "timer": ' || :show_timer || ',
+            "timer": 0,
             "usn": 0
         }
     }',
