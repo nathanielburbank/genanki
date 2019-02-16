@@ -22,6 +22,7 @@ class Package:
     os.close(dbfile)
 
     conn = sqlite3.connect(dbfilename)
+    # conn.set_trace_callback(print) (useful for debugging)
     cursor = conn.cursor()
 
     now_ts = int(time.time())

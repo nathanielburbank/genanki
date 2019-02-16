@@ -4,11 +4,14 @@ from .card import Card
 from .util import guid_for
 
 class Note:
-  def __init__(self, model=None, fields=None, sort_field=None, tags=None, guid=None):
+  def __init__(self, model=None, fields=None, sort_field=None, tags=None, guid=None, note_id='null', card_id='null', csum=0):
     self.model = model
     self.fields = fields
     self.sort_field = sort_field
     self.tags = tags or []
+    self.note_id = note_id
+    self.card_id = card_id
+    self.csum = csum
     try:
       self.guid = guid
     except AttributeError:
@@ -45,7 +48,8 @@ class Note:
     self._guid = val
 
   def write_to_db(self, cursor, now_ts, deck_id):
-    cursor.execute('INSERT INTO notes VALUES(null,?,?,?,?,?,?,?,?,?,?);', (
+    cursor.execute('INSERT INTO notes VALUES(?,?,?,?,?,?,?,?,?,?,?);', (
+        self.note_id,                  #note_id
         self.guid,                    # guid
         self.model.model_id,          # mid
         now_ts,                       # mod
@@ -53,14 +57,15 @@ class Note:
         self._format_tags(),          # TODO tags
         self._format_fields(),        # flds
         self.sort_field,              # sfld
-        0,                            # csum, can be ignored
+        self.csum,                    # csum, can be ignored
         0,                            # flags
         '',                           # data
     ))
 
-    note_id = cursor.lastrowid
+
+    note_id = cursor.lastrowid if self.note_id == 'null' else self.note_id
     for card in self.cards:
-      card.write_to_db(cursor, now_ts, deck_id, note_id)
+      card.write_to_db(cursor, now_ts, deck_id, note_id, self.card_id)
 
   def _format_fields(self):
     return '\x1f'.join(self.fields)
